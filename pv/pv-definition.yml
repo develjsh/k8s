@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-pv
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem # 파일 시스템 형식
+  accessModes:
+    - ReadWriteOnce # 3가지 옵션 중 선택 (ReadWriteMany, ReadOnlyMany, ReadWriteOnce)
+  storageClassName: manual # StorageClass 이름
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /tmp/k8s-pv # 스토리지를 연결할 Path
