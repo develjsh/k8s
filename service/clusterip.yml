@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: clusterip-service
+  namespace: test
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80       # Service 포트
+      targetPort: 8080 # Pod에서 열려 있는 포트
+  type: ClusterIP
