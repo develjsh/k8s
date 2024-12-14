@@ -14,3 +14,19 @@ Service 유형은 크게 4 가지로 분류됩니다.
     외부의 Load Balancer를 사용하는 방법입니다.     
 4. ExternalName  
     kube-dns 컴포넌트로 DNS를 이용하는 방법입니다.  
+
+
+## expose를 통해 yaml 없이 service 배포
+1. nodeport service 배포  
+1.1 Deployment 생성 후 apply -f 를 통해서 적용합니다.  
+1.2 kubectl expose를 통해 deployment를 nodeport로 노출시켜줍니다.  
+ kubectl expose deployment my-app-deployment \  
+  --type="NodePort" \  
+  --port=80 \  
+  --target-port=80 \  
+  --protocol="TCP"  
+1.3 nodeport 확인  
+kubectl get svc  
+
+** 주의 사항 **  
+2024년 기준으로 아직 expose를 통해 명시적으로 nodeport를 지정할 수 없습니다.  
