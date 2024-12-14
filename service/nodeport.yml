@@ -12,3 +12,26 @@ spec:
       targetPort: 8080 # Pod에서 열려 있는 포트
       nodePort: 30001  # 외부에서 접근 가능한 고정 포트 (30000-32767)
   type: NodePort
+
+
+-- 예시 deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: test
+spec:
+  replica: 1
+  selector:
+    matchLabels:
+      app: nginx-app
+  template:
+    metadata:
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+      - name: ngix-container
+        image: nginx:1.7.9
+        ports:
+          containerPort: 80 # nodeport.yml에 targetPort와 동일
